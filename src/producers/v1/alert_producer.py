@@ -1,10 +1,10 @@
 import json
 from aiokafka import AIOKafkaProducer
 from lib.config import settings
-from src.models.v1.models import Alarm
+from src.models.v1.models import Alert
 
 
-class AlarmProducer:
+class AlertProducer:
     def __init__(self):
         self.producer = AIOKafkaProducer(
             bootstrap_servers=settings.KAFKA_BROKER,
@@ -17,8 +17,8 @@ class AlarmProducer:
     async def stop(self):
         await self.producer.stop()
 
-    async def send_alarm(self, alarm: Alarm):
+    async def send_alert(self, alert: Alert):
         await self.producer.send_and_wait(
-            settings.ALARMS_TOPIC,
-            alarm.dict()
+            settings.ALERTS_TOPIC,
+            alert.dict()
         )

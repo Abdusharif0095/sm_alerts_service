@@ -7,11 +7,12 @@ load_dotenv(dotenv_path='lib/configs.env')
 
 
 class Settings:
-    PROJECT_NAME: str = "SM Alarms Service"
-    PROJECT_VERSION: str = "1.0.0"
+    PROJECT_NAME: str = "SM Alerts Service"
+    PROJECT_VERSION: str = "2.0.0"
 
-    ALARMS_TOPIC: str = os.getenv("ALARMS_TOPIC")
+    ALERTS_TOPIC: str = os.getenv("ALERTS_TOPIC")
     KAFKA_BROKER: str = os.getenv("KAFKA_BROKER", "localhost:9092")
+    KAFKA_GROUP_ID: str = os.getenv("KAFKA_GROUP_ID")
     TELEGRAM_TOKEN: str = os.getenv("TELEGRAM_TOKEN")
     TELEGRAM_CHAT_IDS: list[str] = os.getenv("TELEGRAM_CHAT_IDS").split(',')
 

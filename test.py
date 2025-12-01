@@ -1,24 +1,25 @@
 import asyncio
 from datetime import datetime
 
-from src.models.v1.models import Alarm
-from src.producers.v1.alarm_producer import AlarmProducer
+from src.models.v1.models import Alert
+from src.producers.v1.alert_producer import AlertProducer
 
 async def main():
-    producer = AlarmProducer()
+    producer = AlertProducer()
     await producer.start()
     
     try:
-        alarm = Alarm(
+        alert = Alert(
+            layer="python",
             service="Test Service",
             function="test_function",
             error="Test Error",
             datetime=datetime.now().isoformat(),
-            comment="This is a test alarm"
+            comment="This is a test alert"
         )
-        
-        await producer.send_alarm(alarm)
-        print("Test alarm sent successfully")
+
+        await producer.send_alert(alert)
+        print("Test alert sent successfully")
         
     finally:
         await producer.stop()
